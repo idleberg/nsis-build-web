@@ -6,6 +6,9 @@ node_js:
 install:
 - npm install
 - gulp build:index build:docs
-- ls
 - ls dist
 - git status
+- git add dist
+- $now = date
+- git commit -m "build on $date"
+- git push
