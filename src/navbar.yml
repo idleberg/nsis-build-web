@@ -1,0 +1,12 @@
+- title: Get started
+  uri: '#get-started'
+- title: Documentation
+  uri: '#documentation'
+- title: Plugins
+  uri: '#plugins'
+- title: Community
+  items:
+    - title: Wiki
+      uri: 'http://nsis.sourceforge.net'
+    - title: Forum
+      uri: 'http://forums.winamp.com/forumdisplay.php?forumid=65'

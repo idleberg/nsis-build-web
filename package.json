@@ -1,0 +1,43 @@
+{
+  "name": "nsis-www-builder",
+  "version": "0.0.0",
+  "description": "Node script to generate NSIS website",
+  "author": "Jan T. Sott",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idleberg/nsis-www-builder"
+  },
+  "devDependencies": {
+    "fg-loadcss": "^1.3.0",
+    "font-awesome": "^4.6.3",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-cached": "^1.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-markdown": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sitemap": "^4.2.0",
+    "gulp-tap": "^0.1.3",
+    "gulp-uglify": "^3.0.0",
+    "handlebars": "^4.0.5",
+    "highlight.js": "github:isagalaev/highlight.js#master",
+    "js-yaml": "^3.6.1",
+    "mkdirp": "^0.5.1",
+    "mozilla-fira-pack": "0.0.1",
+    "nsis-bootstrap-v3": "github:idleberg/nsis-bootstrap-v3",
+    "nsis-docs": "github:NSIS-Dev/Documentation#master",
+    "nsis-logo-v3": "github:idleberg/nsis-logo-v3",
+    "yaml": "^0.3.0",
+    "yargs": "^6.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "jquery-ui": "^1.12.1"
+  }
+}

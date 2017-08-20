@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Get started",
+    "uri": "#get-started"
+  },
+  {
+    "title": "Documentation",
+    "uri": "#documentation"
+  },
+  {
+    "title": "Plugins",
+    "uri": "#plugins"
+  },
+  {
+    "title": "Community",
+    "items": [
+      {
+        "title": "Wiki",
+        "uri": "#wiki"
+      },
+      {
+        "title": "Forum",
+        "uri": "#wiki"
+      }
+    ]
+  }
+]
