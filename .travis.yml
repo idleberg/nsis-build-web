@@ -9,6 +9,6 @@ install:
 - ls dist
 - git status
 - git add dist
-- now = $(date)
+- now=$(date)
 - git commit -m "build on $now"
 - git push
