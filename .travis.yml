@@ -5,4 +5,4 @@ node_js:
   - "8"
 install:
 - npm install
-- gulp make
+- gulp build
