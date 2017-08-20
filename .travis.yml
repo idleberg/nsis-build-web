@@ -9,6 +9,5 @@ install:
 - ls dist
 - git status
 - git add dist
-- now=$(date)
-- git commit -m "build on $now"
+- git commit -m "gulp build"
 - git push
