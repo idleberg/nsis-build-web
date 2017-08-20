@@ -6,4 +6,6 @@ node_js:
 install:
 - npm install
 - gulp build:index build:docs
+- ls
+- ls dist
 - git status
