@@ -27,9 +27,11 @@
     "gulp-uglify": "^3.0.0",
     "handlebars": "^4.0.5",
     "highlight.js": "github:isagalaev/highlight.js#master",
+    "http-server": "^0.10.0",
     "js-yaml": "^3.6.1",
     "mkdirp": "^0.5.1",
     "mozilla-fira-pack": "0.0.1",
+    "nsis-bootstrap-v3": "github:idleberg/nsis-bootstrap-v3",
     "nsis-docs": "github:NSIS-Dev/Documentation#master",
     "nsis-logo-v3": "github:idleberg/nsis-logo-v3",
     "yaml": "^0.3.0",
@@ -38,5 +40,9 @@
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
     "jquery-ui": "^1.12.1"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "start": "./node_modules/.bin/http-server ./"
   }
 }

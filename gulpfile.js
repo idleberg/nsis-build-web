@@ -54,33 +54,34 @@ const jsFiles = [
     // 'node_modules/fontfaceonload/dist/fontfaceonload.js',
     'src/js/functions.js',
     'src/js/hash.js',
-    'src/js/bookmarks.js',
     'src/js/modal.js',
+    'src/js/bookmarks.js',
     'src/js/preferences.js',
     'src/js/manager.js',
     'src/js/keyboard.js',
     'src/js/highlight.js',
     'src/js/share.js',
     // 'src/js/settings.js',
-    'src/js/search.js'
+    'src/js/search.js',
+    'src/js/init.js'
 ];
 
 // Convert SVG
-gulp.task('build:js', gulp.series( (done) => { 
+gulp.task('build:js', gulp.series( (done) => {
     gulp.src(jsFiles)
     .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('assets/js/'))
+    .pipe(gulp.dest('./assets/js/'))
     // .pipe(cache('uglify'))
     .pipe(debug({title: 'uglify:'}))
     .pipe(concat('scripts.min.js'))
     .pipe(uglify())
     // .pipe(notify("Complete: <%= file.relative %>"))
-    .pipe(gulp.dest('./dist/assets/js/'));
+    .pipe(gulp.dest('./assets/js/'));
 
     done();
 }));
 // Convert SVG
-gulp.task('build:index', gulp.series( (done) => { 
+gulp.task('build:index', gulp.series( (done) => {
     gulp.src('src/views/index.hbs')
     .pipe(tap(function(file) {
       template = handlebars.compile(file.contents.toString());
@@ -90,14 +91,14 @@ gulp.task('build:index', gulp.series( (done) => {
     .pipe(htmlmin({collapseWhitespace: minifyHtml}))
     .pipe(concat('index.html'))
     .pipe(debug({title: 'build:index'}))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./'));
 
     done();
 }));
 
 gulp.task('deploy:css', gulp.series( (done) => {
     gulp.src('node_modules/nsis-bootstrap-v3/dist/css/theme.min.css')
-    .pipe(gulp.dest('./dist/assets/css'));
+    .pipe(gulp.dest('./assets/css'));
 
     done();
 }));
@@ -105,7 +106,7 @@ gulp.task('deploy:css', gulp.series( (done) => {
 gulp.task('deploy:svg', gulp.series( (done) => {
     gulp.src('node_modules/nsis-logo-v3/dist/Logo/outlines-light.svg')
     .pipe(concat('logo.svg'))
-    .pipe(gulp.dest('./dist/assets/img'));
+    .pipe(gulp.dest('./assets/img'));
 
     done();
 }));
@@ -139,10 +140,10 @@ gulp.task('build:docs', gulp.series( (done) => {
             data.version = meta.version;
 
             count = (data.relativePath.match(/\//g) || []).length + 1;
-            data.assetDepth = "../".repeat(count);
+            data.rootFolder = "../".repeat(count);
 
             data.webLink = "https://nsis-dev.github.io/Documents/html/" + data.relativePath + ".html";
-            data.ghLink = "https://github.com/NSIS-Dev/Documentation/edit/master/" + data.relativePath + ".md";
+            data.ghLink = "https://github.com/NSIS-Dev/Documentation/edit/master/" + data.relativePath + ".md#ghLink";
 
             // we will pass data to the Handlebars template to create the actual HTML to use
             html = template(data);
@@ -152,9 +153,34 @@ gulp.task('build:docs', gulp.series( (done) => {
         }))
         .pipe(htmlmin({collapseWhitespace: minifyHtml}))
         .pipe(debug({title: 'build:docs'}))
-        .pipe(gulp.dest('dist/Documentation'));
+        .pipe(gulp.dest('./Documentation'));
     }));
 
+    done()
+}));
+
+gulp.task('build:hljs', gulp.series( (done) => {
+    const spawn = require('child_process').spawn;
+    let opts = {
+        cwd: __dirname + '/node_modules/highlight.js'
+    };
+
+    let npmInstall = spawn('npm', ['install'], opts);
+    npmInstall.stdout.pipe(process.stdout);
+    npmInstall.stderr.pipe(process.stderr);
+
+    npmInstall.on('close', function (code) {
+        if (0 !== code) throw new Error('npm install exited with ' + code);
+
+        let build = spawn('node', ['tools/build.js', 'css', 'json', 'nsis', 'xml'], opts);
+        build.stdout.pipe(process.stdout);
+        build.stderr.pipe(process.stderr);
+
+        build.on('close', function (code) {
+          if (0 !== code) throw new Error('node tools/build.js exited with ' + code);
+          done();
+      });
+    });
     done()
 }));
 
@@ -169,44 +195,56 @@ function transformDocs(filePath) {
     data.bundle = "Nullsoft Scriptable Install System";
 
     if (data.dirName.endsWith('Callbacks') && data.prettyName.startsWith("on")) {
-            data.name = "." + data.prettyName;
-            data.type = "Function";
-            data.pageTitle.push(data.bundle);
-        } else if (data.dirName.endsWith('Callbacks') && data.prettyName.startsWith("un.on")) {
-            data.name = data.prettyName;
-            data.type = "Function";
-            data.pageTitle.push(data.bundle);
-        } else if (data.prettyName.startsWith("__") && data.prettyName.endsWith("__")) {
-            data.name = "${" + data.prettyName + "}";
-            data.type = "Constant";
-            data.pageTitle.push(data.bundle);
-        } else if (data.prettyName.startsWith("NSIS") && data.dirName.endsWith('Variables')) {
-            data.name = "${" + data.prettyName + "}";
-            data.type = "Constant";
-            data.pageTitle.push(data.bundle);
-        }  else if (data.dirName.endsWith('Variables')) {
-            data.name = "$" + data.prettyName;
-            data.type = "Variable";
-            data.pageTitle.push(data.bundle);
-        } else if (data.dirName.startsWith('html/Includes')) {
-            data.name = "${" + data.prettyName + "}";
-            data.type = "Library";
-            data.bundle = path.basename(data.dirName + ".nsh");
-            data.pageTitle.push(data.bundle);
-        } else {
-            data.name = data.prettyName;
-            data.type = "Command";
-            data.pageTitle.push(data.bundle);
-        }
+        data.name = "." + data.prettyName;
+        data.type = "Function";
+        data.pageTitle.push(data.bundle);
+    } else if (data.dirName.endsWith('Callbacks') && data.prettyName.startsWith("un.on")) {
+        data.name = data.prettyName;
+        data.type = "Function";
+        data.pageTitle.push(data.bundle);
+    } else if (data.prettyName.startsWith("__") && data.prettyName.endsWith("__")) {
+        data.name = "${" + data.prettyName + "}";
+        data.type = "Constant";
+        data.pageTitle.push(data.bundle);
+    } else if (data.prettyName.startsWith("NSIS") && data.dirName.endsWith('Variables')) {
+        data.name = "${" + data.prettyName + "}";
+        data.type = "Constant";
+        data.pageTitle.push(data.bundle);
+    }  else if (data.dirName.endsWith('Variables')) {
+        data.name = "$" + data.prettyName;
+        data.type = "Variable";
+        data.pageTitle.push(data.bundle);
+    } else if (data.dirName.startsWith('html/Includes')) {
+        data.name = "${" + data.prettyName + "}";
+        data.type = "Library";
+        data.bundle = path.basename(data.dirName + ".nsh");
+        data.pageTitle.push(data.bundle);
+    } else {
+        data.name = data.prettyName;
+        data.type = "Command";
+        data.pageTitle.push(data.bundle);
+    }
 
-        data.pageTitle.push(data.name);
-        data.pageTitle = data.pageTitle.reverse().join(" | ");
+    data.pageTitle.push(data.name);
+    data.pageTitle = data.pageTitle.reverse().join(" | ");
 
-        return data;
+    return data;
 }
 
+gulp.task('deploy:hljs', gulp.series( (done) => {
+    gulp.src('node_modules/highlight.js/build/highlight.pack.js')
+    .pipe(gulp.dest('./assets/js'));
+
+    done();
+}));
+
 // Available tasks
+gulp.task('hljs', gulp.series('build:hljs', 'deploy:hljs', (done) => {
+    done();
+}));
+
 gulp.task('build', gulp.parallel(
+    'hljs',
     'deploy:css',
     'deploy:svg',
     'build:index',
