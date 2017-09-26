@@ -7,7 +7,7 @@ Bookmarks = {
     saveButton: $('.save-bookmark'),
     sortButton: $('.sort-bookmark'),
     manageButton: $('.manage-bookmarks'),
-    deleteButton: $('.delete-bookmark')  
+    deleteButton: $('.delete-bookmark')
   },
 
 
@@ -50,7 +50,7 @@ Bookmarks = {
                 html += '\n<li><a href="'+item.url+'" rel="bookmark">'+item.name+'</a></li>';
             }
         });
-        
+
         $('#bookmarks-menu ul .divider').nextAll().remove();
         $('#bookmarks-menu ul').append(html);
     } else {
@@ -111,7 +111,7 @@ Bookmarks = {
   delete: function(el) {
     event.preventDefault();
 
-    
+
     if (debug) console.log("Delete bookmark");
     var url = el.parent('td').prev('td').children('.bookmark-url').text();
     el.closest('tr').hide();
@@ -145,7 +145,7 @@ Bookmarks = {
 
     if (name.endsWith(suffix)) {
         name = name.slice(0, -suffix.length);
-    }        
+    }
 
     var url = window.location.href;
     var duplicate = false;

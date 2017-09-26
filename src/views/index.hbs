@@ -1,33 +1,12 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html lang="en">
- <head>
-    <meta charset="utf-8">
-    <script type="text/javascript">WebFontConfig={google:{families:["Fira+Sans:300,400:latin","Fira+Mono::latin"]}},function(){var t=document.createElement("script");t.src=("https:"==document.location.protocol?"https":"http")+"://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js",t.type="text/javascript",t.async="true";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();</script>
-    <title>Home | Nullsoft Scriptable Install System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-    <link rel="prefetch" href="data/documentation.json" data-sha1="{{ searchHash }}">
-    <link rel="stylesheet" href="assets/css/theme.min.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="stylesheet" href="#default" class="hljs-theme">
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/img/iphone.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/iphone@2x.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/ipad.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/img/ipad@2x.png" />
-    <meta name="msapplication-TileColor" content="#9e90aa" />
-    <meta name="msapplication-TileImage" content="assets/img/nsis-tile.png" />
-    <meta name="msapplication-square70x70logo" content="assets/img/nsis-70x70.png" />
-    <meta name="msapplication-square150x150logo" content="assets/img/nsis-150x150.png" />
-    <meta name="msapplication-square310x310logo" content="assets/img/nsis-310x310.png" />
-    <meta name="msapplication-wide310x150logo" content="assets/img/nsis-310x150.png" />
-</head>
-
-<body class="hljs-dark">
-{{> nav }}
-
+{{> common-header}}
+<body class="hljs-dark" data-search="{{ assetDepth }}data/documentation.json" data-sha1="{{ searchHash }}">
+{{> navbar }}
 <div id="content">
     <main class="nsis-docs-masthead bg-gradient">
         <div class="container text-center">
-          <p><img src="assets/img/logo.svg" width="200" height="200"></p>
+          <p><img src="{{ assetDepth }}assets/img/logo.svg" width="200" height="200"></p>
           <h1 class="h2">Nullsoft Scriptable Install System</h2>
           <p class="lead">The professional open source system to create Windows-compatible installers</p>
           <p>
@@ -98,20 +77,6 @@ FunctionEnd</code></pre>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js" defer></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/highlight.js/9.12.0/highlight.min.js" defer></script>
-    <script src="assets/js/scripts.min.js" defer></script>
-    <script type="text/javascript">
-        $(function() {
-          Bookmarks.init();
-          Modal.init();
-          Preferences.init();
-          Keyboard.init();
-          Highlight.init();
-        });
-    </script>
+    {{> common-footer }}
 </body>
 </html>

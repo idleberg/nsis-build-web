@@ -1,7 +1,7 @@
 $(function() {
 
   function locationHashChanged() {
-    var hash = location.hash;  
+    var hash = location.hash;
 
     switch (hash) {
       case "#forum":
@@ -10,15 +10,15 @@ $(function() {
       break;
       case "#wiki":
       url = "http://nsis.sourceforge.net";
-      break;  
+      break;
 
       default:
       return false;
-    }  
+    }
 
     transformPage();
     injectFrame(url);
-  }  
+  }
 
   hash = window.location.hash;
   if( hash !== "") {

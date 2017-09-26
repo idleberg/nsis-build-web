@@ -3,7 +3,7 @@ $(function() {
   var searchItems;
 
   if(typeof searchBody === 'undefined'){
-    var searchBody = "documentation.json";
+    var searchBody = "../../data/documentation.json";
   }
 
   if (use_storage()) {
@@ -12,7 +12,7 @@ $(function() {
     then = localStorage.getItem(searchBody+':age');
 
     if ((now - then) >= 86400000) {
-      
+
       // load JSON file
       console.log("load JSON file");
 
@@ -59,7 +59,7 @@ $(function() {
       // load localStorage
       console.log("load localStorage data");
 
-      searchItems = JSON.parse(localStorage.getItem(searchBody+':body')); 
+      searchItems = JSON.parse(localStorage.getItem(searchBody+':body'));
     }
   }
 });

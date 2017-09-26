@@ -2,7 +2,7 @@ var h,
 Highlight = {
 
   config: {
-    style: 'assets/css/highlighter.css',
+    style: window.location.host + 'assets/css/highlight.css',
     custom: null,
     code: $('pre code'),
     theme: $('.hljs-theme'),
@@ -38,7 +38,7 @@ Highlight = {
        h.theme.attr('href', h.custom);
      }
 
-     
+
      h.code.each(function(i, block) {
        hljs.highlightBlock(block);
      });

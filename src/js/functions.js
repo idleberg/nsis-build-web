@@ -35,9 +35,9 @@ var time = Date.now || function() {
 
 // Open in Command Reference
 function docsPage() {
-  transformPage();  
+  transformPage();
   searchText = $("#search-input").val();
-  window.location.href = 'https://github.com/NSIS-Dev/Documentation/tree/master/Reference/'+searchText+'.md';
+  window.location.href = '/Documentation/Reference/'+searchText+'.html';
   // saveSearch(searchText);
 }
 
@@ -78,7 +78,7 @@ var getBookmarks = function() {
 //                 html += '\n<li><a href="'+item.url+'" rel="bookmark">'+item.name+'</a></li>';
 //             }
 //         });
-        
+
 //         $('#bookmarks-menu ul .divider').nextAll().remove();
 //         $('#bookmarks-menu ul').append(html);
 //     } else {
@@ -114,7 +114,7 @@ var getBookmarks = function() {
 //   if (debug) console.log('Showing page settings');
 
 //   $('.modal').remove();
-  
+
 //   var dark   = "";
 //   var light  = "";
 //   var custom = " hidden";
@@ -167,7 +167,7 @@ function transformPage() {
 function inArrayS(needle, haystackArray){
     var defaultResult = -1;
     var result = defaultResult;
-    $.each(haystackArray, function(index, value) { 
+    $.each(haystackArray, function(index, value) {
         if (result == defaultResult && value.label.toLowerCase() == needle.toLowerCase()) {
             result = index;
         }

@@ -3,8 +3,8 @@ $(function() {
   var searchItems;
   var searchText;
 
-  if(typeof searchBody === 'undefined'){
-    var searchBody = "documentation.json";
+  if(typeof searchBody === 'undefined') {
+    var searchBody = $('body').data('search');
   }
 
 $.ajax(searchBody, {
@@ -45,7 +45,7 @@ $.ajax(searchBody, {
       $("#search-form").submit(function(e){
 
         // e.preventDefault();
-        
+
         if ($.trim( $("#search-input").val() ) === "") {
           return false;
         }
