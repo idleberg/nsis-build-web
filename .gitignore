@@ -5,3 +5,4 @@ src/**/_.*
 gulpfile.old.js
 src/navbar.*
 Documentation/README.html
+todo.md
