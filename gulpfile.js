@@ -47,6 +47,11 @@ const docMarkdown = [
     'node_modules/nsis-docs/**/*.md'
 ];
 
+const cssFiles = [
+    'node_modules/nsis-bootstrap-v3/dist/css/theme.min.css',
+    'node_modules/nsis-highlight.js/dist/highlight.min.css'
+];
+
 const jsFiles = [
     'src/js/functions.js',
     'src/js/hash.js',
@@ -64,10 +69,8 @@ const jsFiles = [
 // Concat & Uglify JS
 gulp.task('build:js', gulp.series( (done) => {
     gulp.src(jsFiles)
-    // .pipe(concat('scripts.js'))
-    // .pipe(gulp.dest('./assets/js/'))
     .pipe(debug({title: 'uglify:'}))
-    .pipe(concat('scripts.min.js'))
+    .pipe(concat('nsis.min.js'))
     .pipe(uglify())
     // .pipe(notify("Complete: <%= file.relative %>"))
     .pipe(gulp.dest('./assets/js/'));
@@ -93,7 +96,8 @@ gulp.task('build:index', gulp.series( (done) => {
 
 // Deploy pre-built CSS
 gulp.task('deploy:css', gulp.series( (done) => {
-    gulp.src('node_modules/nsis-bootstrap-v3/dist/css/theme.min.css')
+    gulp.src(cssFiles)
+    .pipe(concat('nsis.min.css'))
     .pipe(gulp.dest('./assets/css'));
 
     done();
