@@ -5,8 +5,9 @@ node_js:
 install:
   - npm install
   - gulp build
+  - git add -m Documentation/
   - git commit -am "rebuild from source"
-  - git push origin HEAD:master
+  - git push origin HEAD:gh-pages
 git:
   depth: 1
 branches:
