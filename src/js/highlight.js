@@ -2,7 +2,7 @@ var h,
 Highlight = {
 
   config: {
-    style: window.location.host + 'assets/css/highlight.min.css',
+    // style: window.location.host + 'assets/css/highlight.min.css',
     custom: null,
     code: $('pre code'),
     theme: $('.hljs-theme'),
@@ -32,12 +32,11 @@ Highlight = {
     if ((h.custom === "dark") || (h.custom === "light")) {
        if (debug) console.log('Default ' + h.custom + ' theme');
        h.body.removeClass('hljs-dark hljs-light').addClass('hljs-' + h.custom);
-       h.theme.attr('href', h.style);
+       // h.theme.attr('href', h.style);
      } else {
        if (debug) console.log('Custom theme from ' + h.custom)
        h.theme.attr('href', h.custom);
      }
-
 
      h.code.each(function(i, block) {
        hljs.highlightBlock(block);
