@@ -239,12 +239,8 @@ gulp.task('deploy:hljs', gulp.series( (done) => {
 }));
 
 // Available tasks
-gulp.task('hljs', gulp.series('build:hljs', 'deploy:hljs', (done) => {
-    done();
-}));
-
 gulp.task('build', gulp.parallel(
-    'hljs',
+    'deploy:hljs',
     'deploy:css',
     'deploy:svg',
     'build:index',
