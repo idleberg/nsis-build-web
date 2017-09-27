@@ -6,8 +6,8 @@ install:
   - npm install
   - gulp build
   - git remote set-url origin git@github.com:idleberg/nsis-build-web.git
-  - git add -m Documentation/
-  - git commit -am "rebuild from source"
+  - git add Documentation/
+  - git commit -m "rebuild from source"
   - git push origin HEAD:master
 git:
   depth: 1
