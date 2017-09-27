@@ -2,13 +2,19 @@ sudo: false
 language: node_js
 node_js:
   - "lts/*"
-install:
-  - npm install
-  - gulp build
-  - git remote set-url origin git@github.com:idleberg/nsis-build-web.git
-  - git add -m Documentation/
-  - git commit -am "rebuild from source"
-  - git push origin HEAD:master
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
+# install:
+#   - npm install
+#   - gulp build
+#   - git remote set-url origin git@github.com:idleberg/nsis-build-web.git
+#   - git add Documentation/
+#   - git commit -m "rebuild from source"
+#   - git push origin HEAD:master
 git:
   depth: 1
 branches:
