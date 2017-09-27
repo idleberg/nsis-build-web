@@ -2,7 +2,7 @@ var h,
 Highlight = {
 
   config: {
-    style: window.location.host + 'assets/css/highlight.css',
+    style: window.location.host + 'assets/css/highlight.min.css',
     custom: null,
     code: $('pre code'),
     theme: $('.hljs-theme'),
