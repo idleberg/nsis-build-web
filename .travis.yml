@@ -1,10 +1,11 @@
 sudo: false
 language: node_js
 node_js:
-  - "node"
   - "lts/*"
 install:
   - npm install
   - gulp build
   - git commit -am "rebuild from source"
   - git push
+notifications:
+  email: false
