@@ -48,10 +48,6 @@ const docMarkdown = [
 ];
 
 const jsFiles = [
-    // 'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    // 'node_modules/highlight.js/build/highlight.pack.js',
-    // 'node_modules/jquery-ui/ui/widget.js',
-    // 'node_modules/fontfaceonload/dist/fontfaceonload.js',
     'src/js/functions.js',
     'src/js/hash.js',
     'src/js/modal.js',
@@ -61,12 +57,11 @@ const jsFiles = [
     'src/js/keyboard.js',
     'src/js/highlight.js',
     'src/js/share.js',
-    // 'src/js/settings.js',
     'src/js/search.js',
     'src/js/init.js'
 ];
 
-// Convert SVG
+// Concat & Uglify JS
 gulp.task('build:js', gulp.series( (done) => {
     gulp.src(jsFiles)
     // .pipe(concat('scripts.js'))
@@ -79,7 +74,8 @@ gulp.task('build:js', gulp.series( (done) => {
 
     done();
 }));
-// Convert SVG
+
+// Build Index Page
 gulp.task('build:index', gulp.series( (done) => {
     gulp.src('src/views/index.hbs')
     .pipe(tap(function(file) {
@@ -95,6 +91,7 @@ gulp.task('build:index', gulp.series( (done) => {
     done();
 }));
 
+// Deploy pre-built CSS
 gulp.task('deploy:css', gulp.series( (done) => {
     gulp.src('node_modules/nsis-bootstrap-v3/dist/css/theme.min.css')
     .pipe(gulp.dest('./assets/css'));
@@ -102,10 +99,19 @@ gulp.task('deploy:css', gulp.series( (done) => {
     done();
 }));
 
+// Deploy pre-built SVG
 gulp.task('deploy:svg', gulp.series( (done) => {
     gulp.src('node_modules/nsis-logo-v3/dist/Logo/outlines-light.svg')
     .pipe(concat('logo.svg'))
     .pipe(gulp.dest('./assets/img'));
+
+    done();
+}));
+
+// Deploy pre-built JavaScript
+gulp.task('deploy:js', gulp.series( (done) => {
+    gulp.src('node_modules/highlight.js/build/highlight.pack.js')
+    .pipe(gulp.dest('./assets/js'));
 
     done();
 }));
@@ -158,6 +164,7 @@ gulp.task('build:docs', gulp.series( (done) => {
     done()
 }));
 
+// Build custom Highlight.js
 gulp.task('build:hljs', gulp.series( (done) => {
     const spawn = require('child_process').spawn;
     let opts = {
@@ -230,16 +237,10 @@ function transformDocs(filePath) {
     return data;
 }
 
-gulp.task('deploy:hljs', gulp.series( (done) => {
-    gulp.src('node_modules/highlight.js/build/highlight.pack.js')
-    .pipe(gulp.dest('./assets/js'));
-
-    done();
-}));
 
 // Available tasks
 gulp.task('build', gulp.parallel(
-    'deploy:hljs',
+    'deploy:js',
     'deploy:css',
     'deploy:svg',
     'build:index',
