@@ -1,5 +1,5 @@
 {
-  "name": "nsis-www-builder",
+  "name": "nsis-build-web",
   "version": "0.0.0",
   "description": "Node script to generate NSIS website",
   "author": "Jan T. Sott",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idleberg/nsis-www-builder"
+    "url": "git+https://github.com/idleberg/nsis-build-web"
   },
   "devDependencies": {
     "fg-loadcss": "^1.3.0",
