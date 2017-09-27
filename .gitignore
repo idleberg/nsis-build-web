@@ -1,8 +1,9 @@
 node_modules/
 src/**/_.*
+todo.md
 
 # temporary
 gulpfile.old.js
 src/navbar.*
-Documentation/README.html
-todo.md
+src/views/partials/assets-*.hbs
+Documentation/
