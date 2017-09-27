@@ -9,12 +9,11 @@
           <p><img src="{{ assetDepth }}assets/img/logo.svg" width="200" height="200"></p>
           <h1 class="h2">Nullsoft Scriptable Install System</h2>
           <p class="lead">The professional open source system to create Windows-compatible installers</p>
-          <p>
-            <a href="http://prdownloads.sourceforge.net/nsis/nsis-2.50-setup.exe?download" class="btn btn-success rounded">Download</a>
-            <a href="http://prdownloads.sourceforge.net/nsis/nsis-3.0b3-setup.exe?download" class="btn btn-outline-default rounded">Special Builds</a>
-            <a href="#" class="btn btn-outline-default rounded">Source</a>
-        </p>
-        <p class="text-muted">Currently v2.50 and v3.0b3</p>
+          <ul class="list-inline">
+            <li><a href="http://prdownloads.sourceforge.net/nsis/nsis-3.02.1-setup.exe?download" class="btn btn-success rounded">Download</a></li>
+            <li><a href="#" class="btn btn-outline-default rounded">Source</a></li>
+        </ul>
+        <p class="text-muted">v3.02.1</p>
     </div>
 </main>
 
@@ -62,14 +61,14 @@ Page instfiles
 ; Sections ---------------------------------
 Section "section_name" section_name_index
 
-Call Dialog
+    Call Dialog
 
 SectionEnd
 
 ; Functions --------------------------------
 Function Dialog
 
-MessageBox MB_OK "Hello World"
+    MessageBox MB_OK "Hello World"
 
 FunctionEnd</code></pre>
                 </div>

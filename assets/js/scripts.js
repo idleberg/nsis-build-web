@@ -769,9 +769,9 @@ var time = Date.now || function() {
 
 // Open in Command Reference
 function docsPage() {
-  transformPage();  
+  transformPage();
   searchText = $("#search-input").val();
-  window.location.href = 'https://github.com/NSIS-Dev/Documentation/tree/master/Reference/'+searchText+'.md';
+  window.location.href = '/Documentation/Reference/'+searchText+'.html';
   // saveSearch(searchText);
 }
 
@@ -812,7 +812,7 @@ var getBookmarks = function() {
 //                 html += '\n<li><a href="'+item.url+'" rel="bookmark">'+item.name+'</a></li>';
 //             }
 //         });
-        
+
 //         $('#bookmarks-menu ul .divider').nextAll().remove();
 //         $('#bookmarks-menu ul').append(html);
 //     } else {
@@ -848,7 +848,7 @@ var getBookmarks = function() {
 //   if (debug) console.log('Showing page settings');
 
 //   $('.modal').remove();
-  
+
 //   var dark   = "";
 //   var light  = "";
 //   var custom = " hidden";
@@ -901,7 +901,7 @@ function transformPage() {
 function inArrayS(needle, haystackArray){
     var defaultResult = -1;
     var result = defaultResult;
-    $.each(haystackArray, function(index, value) { 
+    $.each(haystackArray, function(index, value) {
         if (result == defaultResult && value.label.toLowerCase() == needle.toLowerCase()) {
             result = index;
         }
@@ -935,7 +935,7 @@ $.widget( "custom.hint", $.ui.autocomplete, {
 $(function() {
 
   function locationHashChanged() {
-    var hash = location.hash;  
+    var hash = location.hash;
 
     switch (hash) {
       case "#forum":
@@ -944,15 +944,15 @@ $(function() {
       break;
       case "#wiki":
       url = "http://nsis.sourceforge.net";
-      break;  
+      break;
 
       default:
       return false;
-    }  
+    }
 
     transformPage();
     injectFrame(url);
-  }  
+  }
 
   hash = window.location.hash;
   if( hash !== "") {
@@ -962,6 +962,49 @@ $(function() {
   window.onhashchange = locationHashChanged;
 
 });
+var m,
+Modal = {
+
+  // config: {
+  //   saveButton: $('.save-bookmark'),
+  //   sortButton: $('.sort-bookmark'),
+  //   manageButton: $('.manage-bookmarks')
+  // },
+
+
+  init: function() {
+    // m = this.config;
+    this.events();
+  },
+
+  // click events
+  events: function() {
+  },
+
+  header: function(classes, name) {
+    var header = "<div class=\""+classes+" modal fade\" tabindex=\"-1\" role=\"dialog\">";
+    header += "\n  <div class=\"modal-dialog\">";
+    header += "\n    <div class=\"modal-content\">";
+    header += "\n      <div class=\"modal-header\">";
+    header += "\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>";
+    header += "\n        <h4 class=\"modal-title\">"+name+"</h4>";
+    header += "\n      </div>";
+    header += "\n      <div class=\"modal-body\">";
+    return header;
+  },
+
+  footer: function(button) {
+    var footer = "\n      </div>";
+    footer += "\n      <div class=\"modal-footer\">";
+    footer += "\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">"+button+"</button>";
+    footer += "\n      </div>";
+    footer += "\n    </div>";
+    footer += "\n  </div>";
+    footer += "\n</div>";
+    return footer;
+  }
+
+};
 var debug = true;
 
 var b,
@@ -971,7 +1014,7 @@ Bookmarks = {
     saveButton: $('.save-bookmark'),
     sortButton: $('.sort-bookmark'),
     manageButton: $('.manage-bookmarks'),
-    deleteButton: $('.delete-bookmark')  
+    deleteButton: $('.delete-bookmark')
   },
 
 
@@ -1014,7 +1057,7 @@ Bookmarks = {
                 html += '\n<li><a href="'+item.url+'" rel="bookmark">'+item.name+'</a></li>';
             }
         });
-        
+
         $('#bookmarks-menu ul .divider').nextAll().remove();
         $('#bookmarks-menu ul').append(html);
     } else {
@@ -1075,7 +1118,7 @@ Bookmarks = {
   delete: function(el) {
     event.preventDefault();
 
-    
+
     if (debug) console.log("Delete bookmark");
     var url = el.parent('td').prev('td').children('.bookmark-url').text();
     el.closest('tr').hide();
@@ -1109,7 +1152,7 @@ Bookmarks = {
 
     if (name.endsWith(suffix)) {
         name = name.slice(0, -suffix.length);
-    }        
+    }
 
     var url = window.location.href;
     var duplicate = false;
@@ -1158,49 +1201,6 @@ Bookmarks = {
 
 
 };
-var m,
-Modal = {
-
-  // config: {
-  //   saveButton: $('.save-bookmark'),
-  //   sortButton: $('.sort-bookmark'),
-  //   manageButton: $('.manage-bookmarks')
-  // },
-
-
-  init: function() {
-    // m = this.config;
-    this.events();
-  },
-
-  // click events
-  events: function() {
-  },
-
-  header: function(classes, name) {
-    var header = "<div class=\""+classes+" modal fade\" tabindex=\"-1\" role=\"dialog\">";
-    header += "\n  <div class=\"modal-dialog\">";
-    header += "\n    <div class=\"modal-content\">";
-    header += "\n      <div class=\"modal-header\">";
-    header += "\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>";
-    header += "\n        <h4 class=\"modal-title\">"+name+"</h4>";
-    header += "\n      </div>";
-    header += "\n      <div class=\"modal-body\">";
-    return header;
-  },
-
-  footer: function(button) {
-    var footer = "\n      </div>";
-    footer += "\n      <div class=\"modal-footer\">";
-    footer += "\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">"+button+"</button>";
-    footer += "\n      </div>";
-    footer += "\n    </div>";
-    footer += "\n  </div>";
-    footer += "\n</div>";
-    return footer;
-  }
-
-};
 var p,
 Preferences = {
 
@@ -1225,7 +1225,7 @@ Preferences = {
 
     $('body').on('click', '.set-highlighter', function (event) {
       Preferences.switch();
-    });  
+    });
   },
 
   // populate menu with bookmarks
@@ -1240,7 +1240,6 @@ Preferences = {
 
     $('.set-highlighter').removeClass("active");
     p.customTheme.addClass('hidden');
-    console.log(event.target);
     $(event.target).addClass("active");
 
     var text = $(event.target).text().toLowerCase();
@@ -1248,7 +1247,7 @@ Preferences = {
 
     if ((text === "dark") || (text === "light")) {
         $('body').removeClass('hljs-dark hljs-light').addClass('hljs-' + text);
-        $('.hljs-theme').attr('href', 'assets/css/highlighter.css');
+        $('.hljs-theme').attr('href', window.location.host + '/assets/css/highlight.min.css');
         localStorage.setItem('hljs-theme', text);
     }
     if (debug) console.log("Highlighter is set to " + text);
@@ -1259,14 +1258,14 @@ Preferences = {
     if (debug) console.log('Showing page settings');
 
     $('.modal').remove();
-    
+
     var dark   = "";
     var light  = "";
     var custom = " hidden";
 
     var theme = localStorage.getItem('hljs-theme');
 
-    console.log("-"+theme+"-")
+    console.log("Selected theme: " + theme);
 
     if ( theme === 'dark' ) {
        dark  = " active";
@@ -1301,7 +1300,7 @@ Preferences = {
 //     $('.setup-page').click(function(event) {
 
 //         event.preventDefault();
-//         showSettings(); 
+//         showSettings();
 //     });
 
 //     $('body').on('click', p.switchButton, function (event) {
@@ -1323,10 +1322,10 @@ Preferences = {
 //         }
 
 //         if (debug) console.log("Highlighter is set to " + text);
-        
-        
+
+
 //         // $('.hljs-theme').attr("href", theme);
-        
+
 //     });
 
 // });
@@ -1420,7 +1419,7 @@ var h,
 Highlight = {
 
   config: {
-    style: 'assets/css/highlighter.css',
+    style: window.location.host + 'assets/css/highlight.css',
     custom: null,
     code: $('pre code'),
     theme: $('.hljs-theme'),
@@ -1456,7 +1455,7 @@ Highlight = {
        h.theme.attr('href', h.custom);
      }
 
-     
+
      h.code.each(function(i, block) {
        hljs.highlightBlock(block);
      });
@@ -1483,8 +1482,8 @@ $(function() {
   var searchItems;
   var searchText;
 
-  if(typeof searchBody === 'undefined'){
-    var searchBody = "documentation.json";
+  if(typeof searchBody === 'undefined') {
+    var searchBody = $('body').data('search');
   }
 
 $.ajax(searchBody, {
@@ -1525,7 +1524,7 @@ $.ajax(searchBody, {
       $("#search-form").submit(function(e){
 
         // e.preventDefault();
-        
+
         if ($.trim( $("#search-input").val() ) === "") {
           return false;
         }
@@ -1539,4 +1538,11 @@ $.ajax(searchBody, {
 
       $('.ui-autocomplete').css({padding: '0'});
   });
+});
+$(function() {
+  Bookmarks.init();
+  Modal.init();
+  Preferences.init();
+  Keyboard.init();
+  Highlight.init();
 });
