@@ -50,7 +50,7 @@ const docMarkdown = [
 const jsFiles = [
     // 'node_modules/bootstrap/dist/js/bootstrap.min.js',
     // 'node_modules/highlight.js/build/highlight.pack.js',
-    'node_modules/jquery-ui/ui/widget.js',
+    // 'node_modules/jquery-ui/ui/widget.js',
     // 'node_modules/fontfaceonload/dist/fontfaceonload.js',
     'src/js/functions.js',
     'src/js/hash.js',
