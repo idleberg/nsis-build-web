@@ -6,7 +6,7 @@ install:
   - npm install
   - gulp build
   - git commit -am "rebuild from source"
-  - git push
+  - git push origin HEAD:master
 git:
   depth: 1
 branches:
