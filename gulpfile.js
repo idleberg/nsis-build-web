@@ -69,9 +69,8 @@ const jsFiles = [
 // Convert SVG
 gulp.task('build:js', gulp.series( (done) => {
     gulp.src(jsFiles)
-    .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('./assets/js/'))
-    // .pipe(cache('uglify'))
+    // .pipe(concat('scripts.js'))
+    // .pipe(gulp.dest('./assets/js/'))
     .pipe(debug({title: 'uglify:'}))
     .pipe(concat('scripts.min.js'))
     .pipe(uglify())
