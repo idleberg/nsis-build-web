@@ -4,3 +4,4 @@ src/**/_.*
 # temporary
 gulpfile.old.js
 src/navbar.*
+Documentation/README.html
