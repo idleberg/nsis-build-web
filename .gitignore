@@ -7,3 +7,4 @@ gulpfile.old.js
 src/navbar.*
 src/views/partials/assets-*.hbs
 Documentation/
+index.html
